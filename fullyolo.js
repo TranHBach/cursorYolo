@@ -51,23 +51,25 @@ function runCurrent(){
     }
 }
 
-
 function runCursorv1_6(){
     const toolCallDiv = document.querySelectorAll('div.composer-tool-call-header-content');
     if (toolCallDiv.length > 0) {
         const currentToolCall = toolCallDiv[toolCallDiv.length - 1];
-
+        
+        // MCP is run by default
         if (currentToolCall.textContent.startsWith("Call")) {
             runCurrent();
             return;
         }
 
+        // Check if the command is blacklisted
         const containsBlacklistedString = blacklisted_command_strings.some(blacklistedStr =>
             currentToolCall.textContent.includes(blacklistedStr)
         );
 
         if (!containsBlacklistedString) {
             runCurrent();
+            return;
         }
     }
 }
