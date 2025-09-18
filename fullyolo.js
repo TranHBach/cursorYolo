@@ -1,6 +1,10 @@
 // Change this as you want.
 const blacklisted_command_strings = ["rm"]
 
+// This is for Cursor 1.6
+function runCursorLatest() {
+    
+}
 
 function runAllMCP(){
     const allDivAndSpans = document.querySelectorAll('div, span');
@@ -35,9 +39,38 @@ function runCommand(){
     }    
 }
 
-function runBoth(){
+function runCursorv1_5(){
     runAllMCP();
     runCommand();
 }
 
-setInterval(runBoth, 1000);
+function runCurrent(){
+    const runButton = document.querySelector('div.composer-run-button');
+    if (runButton) {
+        runButton.click();
+    }
+}
+
+
+function runCursorv1_6(){
+    const toolCallDiv = document.querySelectorAll('div.composer-tool-call-header-content');
+    if (toolCallDiv.length > 0) {
+        const currentToolCall = toolCallDiv[toolCallDiv.length - 1];
+
+        if (currentToolCall.textContent.startsWith("Call")) {
+            runCurrent();
+            return;
+        }
+
+        const containsBlacklistedString = blacklisted_command_strings.some(blacklistedStr =>
+            currentToolCall.textContent.includes(blacklistedStr)
+        );
+
+        if (!containsBlacklistedString) {
+            runCurrent();
+        }
+    }
+}
+
+setInterval(runCursorv1_5, 1000);
+setInterval(runCursorv1_6, 1000);
