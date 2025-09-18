@@ -16,14 +16,11 @@ function runAllMCP(){
 
 function runCommand(){
     const commandElements = document.querySelectorAll("div.view-lines.monaco-mouse-cursor-text[role='presentation']");
-    const matchingElements = Array.from(commandElements).filter(element => 
-        element.textContent === command
-    );
     
     // greater than 1 because the main text editor also has this class.
-    if (matchingElements.length > 1) {
+    if (commandElements.length > 1) {
         // Get the last matching element
-        let targetElement = matchingElements[matchingElements.length - 1];
+        let targetElement = commandElements[commandElements.length - 1];
         
         // Check if textContent contains any blacklisted strings
         const containsBlacklistedString = blacklisted_command_strings.some(blacklistedStr =>
