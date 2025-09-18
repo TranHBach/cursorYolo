@@ -1,4 +1,4 @@
-This is a script to automatically run Cursor MCP and command
+This is a script to automatically run Cursor MCP and command. You'll need to run the `install.sh` script again after update Cursor
 
 ### Usage:
 - Run `install.sh`
