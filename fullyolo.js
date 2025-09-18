@@ -10,7 +10,6 @@ function runAllMCP(){
     
     if (targetElement) {
         targetElement.click()
-        return true;
     }
 }
 
@@ -28,11 +27,12 @@ function runCommand(){
         );
         
         if (!containsBlacklistedString) {
-            targetElement.click();
-            return true;
+            const runDiv = document.querySelector('#run');
+            if (runDiv) {
+                runDiv.click();
+            }
         }
     }    
-    return false;
 }
 
 function runBoth(){
